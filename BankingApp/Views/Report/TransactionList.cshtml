@@ -1,0 +1,56 @@
+@using BankingApp.Model
+
+@model IEnumerable<BankingApp.Model.TransactionInfo>
+
+@{
+    ViewData["Title"] = "Transactions";
+}
+
+<h2>Transactions</h2>
+
+@Html.Partial("_UserAccountDetails")
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransactionType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TransactionDate)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionType)
+            </td>
+            <td align="right">
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionDate)
+            </td>
+        </tr>
+}
+        <tr>
+            <td>
+                <b>Total Amount</b>
+            </td>
+            <td align="right">
+                @String.Format("{0:#,##0.00}", ((ViewData["UserAccount"] as UserAccount).CurrentBalance))
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr/>
+

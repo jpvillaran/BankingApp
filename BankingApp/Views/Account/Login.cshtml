@@ -1,0 +1,49 @@
+@model BankingApp.ViewModel.LoginViewModel
+
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Login">
+    <div class="form-horizontal">
+        <div class="text-danger">@Html.ValidationMessage("Error")</div>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="AccountNumber" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="AccountNumber" class="form-control" />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="RememberMe" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="RememberMe" class="form-control" />
+                <span asp-validation-for="RememberMe" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            Not yet a member?  
+            <a asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+        </ul>
+    </div>
+</form>
+
+

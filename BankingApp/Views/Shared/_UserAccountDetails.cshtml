@@ -1,0 +1,12 @@
+@using BankingApp.Model
+@{
+    var account = ViewData["UserAccount"] as UserAccount;
+}
+
+<div>
+    <div>
+        <h3>
+            Your current balance is @String.Format("{0:#,##0.00}", account.CurrentBalance)
+        </h3>
+    </div>
+</div>

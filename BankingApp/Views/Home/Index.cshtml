@@ -1,0 +1,29 @@
+﻿@model BankingApp.Model.UserAccount
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div>
+        <h2>
+            Hi <b>@ViewData["FullName"]</b>! Your current balance is @String.Format("{0:#,##0.00}", Model.CurrentBalance)
+        </h2>
+    </div>
+</div>
+
+<div>
+    <div>
+        <h3>
+            What do you want to do?
+        </h3>
+    </div>
+    <div>
+        <ul>
+            <li><a asp-area="" asp-controller="Transaction" asp-action="Deposit">I want to <b>Deposit</b> an amount to my account.</a></li>
+            <li><a asp-area="" asp-controller="Transaction" asp-action="Withdraw">I want to <b>Withdraw</b> an amount from my account.</a></li>
+            <li><a asp-area="" asp-controller="Transaction" asp-action="Transfer">I want to <b>Transfer</b> money to another account.</a></li>
+            <li><a asp-area="" asp-controller="Report" asp-action="TransactionList">I want to view all my <b>Transactions</b>.</a></li>
+</ul>
+    </div>
+</div>
