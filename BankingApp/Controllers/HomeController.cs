@@ -8,15 +8,16 @@ using BankingApp.Models;
 using Microsoft.EntityFrameworkCore;
 using BankingApp.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using BankingApp.Data;
 
 namespace BankingApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BankingContext _context;
+        private readonly IBankingContext _context;
         private readonly UserManager<BankingIdentityUser> _userManager;
 
-        public HomeController(BankingContext context, UserManager<BankingIdentityUser> userManager)
+        public HomeController(IBankingContext context, UserManager<BankingIdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

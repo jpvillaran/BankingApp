@@ -47,6 +47,8 @@ namespace BankingApp
             })
                     .AddEntityFrameworkStores<BankingIdentityContext>()
                     .AddDefaultTokenProviders();
+
+            services.AddScoped<IBankingContext>(provider => provider.GetService<BankingContext>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

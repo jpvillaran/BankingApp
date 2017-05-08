@@ -1,4 +1,5 @@
-﻿using BankingApp.Infrastructure;
+﻿using BankingApp.Data;
+using BankingApp.Infrastructure;
 using BankingApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,10 +15,10 @@ namespace BankingApp.Controllers
     [Authorize]
     public class ReportController : Controller
     {
-        private readonly BankingContext _context;
+        private readonly IBankingContext _context;
         private readonly UserManager<BankingIdentityUser> _userManager;
 
-        public ReportController(BankingContext context, UserManager<BankingIdentityUser> userManager)
+        public ReportController(IBankingContext context, UserManager<BankingIdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

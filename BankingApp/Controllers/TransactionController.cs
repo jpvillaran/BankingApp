@@ -10,16 +10,17 @@ using Microsoft.AspNetCore.Authorization;
 using BankingApp.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using BankingApp.Model;
+using BankingApp.Data;
 
 namespace BankingApp.Controllers
 {
     [Authorize]
     public class TransactionController : Controller
     {
-        private readonly BankingContext _context;
+        private readonly IBankingContext _context;
         private readonly UserManager<BankingIdentityUser> _userManager;
 
-        public TransactionController(BankingContext context, UserManager<BankingIdentityUser> userManager)
+        public TransactionController(IBankingContext context, UserManager<BankingIdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -60,9 +61,9 @@ namespace BankingApp.Controllers
                 });
 
                 var result = await _context.SaveChangesAsync();
-                ViewData["UserAccount"] = await this.GetAccount();
                 return RedirectToAction("Index", "Home");
             }
+            ViewData["UserAccount"] = await this.GetAccount();
             return View(deposit);
         }
 
@@ -89,6 +90,7 @@ namespace BankingApp.Controllers
                     });
 
                     var result = await _context.SaveChangesAsync();
+                    ViewData["UserAccount"] = await this.GetAccount();
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -103,7 +105,11 @@ namespace BankingApp.Controllers
             if (ModelState.IsValid)
             {
                 var account = await this.GetAccount();
-                if (transfer.Amount > account.CurrentBalance)
+                if (transfer.AccountNumber == account.AccountNumber)
+                {
+                    ModelState.AddModelError("Error", "Unable to transfer to own account.");
+                }
+                else if (transfer.Amount > account.CurrentBalance)
                 {
                     ModelState.AddModelError("Error", "The account balance is lesser than the transfer amount.");
                 }

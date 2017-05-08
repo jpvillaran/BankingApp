@@ -11,19 +11,20 @@ using BankingApp.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using BankingApp.Infrastructure;
+using BankingApp.Data;
 
 namespace BankingApp.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly BankingContext _context;
+        private readonly IBankingContext _context;
         private readonly UserManager<BankingIdentityUser> _userManager;
         private readonly SignInManager<BankingIdentityUser> _loginManager;
         private readonly RoleManager<BankingIdentityRole> _roleManager;
 
 
-        public AccountController(BankingContext context, 
+        public AccountController(IBankingContext context, 
             UserManager<BankingIdentityUser> userManager,
             SignInManager<BankingIdentityUser> loginManager,
             RoleManager<BankingIdentityRole> roleManager)
